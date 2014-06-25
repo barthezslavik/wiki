@@ -2,8 +2,9 @@ require 'open-uri'
 
 class PostsController < InheritedResources::Base
   def parser
-    clear(false)
-    parse(10)
+    #clear(false)
+    #parse(10)
+    fix_links
     head :ok
   end
 
@@ -31,5 +32,14 @@ class PostsController < InheritedResources::Base
       links = doc.css("#mw-content-text p").first.css("a").map{ |l| [l.text, "http://ru.wikipedia.org#{l[:href]}"] }
       links.each { |l| Link.where(url: l.last, value: l.first).first_or_create! }
     end
+  end
+
+  def fix_links
+    Link.all.each do |l|
+      doc = Nokogiri::HTML(open(l.url))
+      l.value = doc.title.gsub(" — Википедия","")
+      l.save
+    end
+    Link.where(value: "Википедия — свободная энциклопедия").delete_all
   end
 end
