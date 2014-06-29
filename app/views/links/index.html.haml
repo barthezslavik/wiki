@@ -1,0 +1,5 @@
+%table
+  %tbody
+    - @links.each do |link|
+      %tr
+        %td= link_to link.value, link.url

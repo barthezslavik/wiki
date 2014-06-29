@@ -28,6 +28,10 @@ gem 'spring',        group: :development
 
 gem 'inherited_resources'
 gem 'nokogiri'
+gem 'quiet_assets', group: :development
+gem 'haml-rails', group: :development
+gem 'erb2haml', group: :development
+gem "twitter-bootstrap-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

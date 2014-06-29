@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140624012821) do
   create_table "links", force: true do |t|
     t.string   "url"
     t.string   "value"
+    t.string   "parent"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,4 +32,11 @@ ActiveRecord::Schema.define(version: 20140624012821) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "wikis", force: true do |t|
+    t.string "name"
+    t.string "url"
+    t.text   "content"
+  end
+
 end
